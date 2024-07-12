@@ -75,7 +75,7 @@ resource "aws_instance" "my_terraform_ec2_Instance" {
   instance_type   = "t2.micro"
   subnet_id       = aws_subnet.my_subnet.id
   security_groups = [aws_security_group.my_security_group.id]
-  key_name        = aws_key_pair.my_key.key_nam
+  key_name        = aws_key_pair.my_key.key_name
   provisioner "remote-exec" {
     inline = [
       "chmod +x build.sh",
