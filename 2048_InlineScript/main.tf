@@ -73,17 +73,23 @@ resource "aws_instance" "my_terraform_ec2_Instance" {
   security_groups             = [aws_security_group.my_security_group.id]
   key_name                    = "terraform-learning-key"
   associate_public_ip_address = true
+
+  provisioner "file" {
+    source      = "./build.sh"
+    destination = "/tmp/build.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "chmod +x build.sh",
-      "./build.sh",
+      "chmod +x /tmp/build.sh",
+      "/tmp/build.sh"
     ]
-    connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      private_key = file("/Users/naveenkumarduraisamy/Downloads/terraform-learning-key.pem")
-      host        = self.public_ip
-    }
+  }
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("terraform-learning-key path")
+    host        = self.public_ip
   }
 
   tags = {
