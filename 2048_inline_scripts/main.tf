@@ -88,7 +88,7 @@ resource "aws_instance" "my_terraform_ec2_Instance" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("terraform-learning-key path")
+    private_key = file("/Users/naveenkumarduraisamy/Downloads/terraform-learning-key.pem")
     host        = self.public_ip
   }
 
